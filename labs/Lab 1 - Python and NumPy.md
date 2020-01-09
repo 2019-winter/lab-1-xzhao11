@@ -13,8 +13,8 @@ jupyter:
     name: python3
 ---
 
-# Name(s)
-**PUT YOUR FULL NAME(S) HERE**
+# Name
+**Curly Zhao**
 
 
 **Instructions:** This is an individual assignment, but you may discuss your code with your neighbors.
@@ -36,7 +36,11 @@ Please read and reference the following as your progress through this course.
 **In the space provided below, what are three things that still remain unclear or need further explanation?**
 
 
-**YOUR ANSWER HERE**
+Are the markdown files auto updated when the notebook file is saved?
+
+Are all variables in all code cells global? If yes, how do we create local variables?
+
+What is the raw mode in notebook?
 
 
 ## Exercises 1-7
@@ -46,46 +50,73 @@ For the following exercises please read the Python appendix in the Marsland text
 ## Exercise 1
 
 ```python
-# YOUR SOLUTION HERE
-#a=1000
-print('this is my answer',a+1) 
+import numpy as np
+a = np.ones((6, 4))
+a[0:][0:] = 2
+print(a)
 ```
 
 ## Exercise 2
 
 ```python
-# YOUR SOLUTION HERE
-a=2000
+b = np.ones((6, 4))
+np.fill_diagonal(b, 3)
+print(b)
 ```
 
 ## Exercise 3
 
 ```python
-# YOUR SOLUTION HERE
+c = a * b
+print(c)
 ```
 
 ## Exercise 4
 
 ```python
-# YOUR SOLUTION HERE
+d = np.dot(a.transpose(), b)
+print(d)
+e = np.dot(a, b.transpose())
+print(e)
 ```
 
 ## Exercise 5
 
 ```python
-# YOUR SOLUTION HERE
+def test(x, y):
+    z = x*2 + y**2
+    print(z)
+test(3, 4)
 ```
 
 ## Exercise 6
 
 ```python
-# YOUR SOLUTION HERE
+def arrayTest():
+    a = np.random.randn(4, 3)
+    b = np.random.randn(4, 3)
+    c = np.random.randn(4, 3)
+    print(a+b+c)
+    print((a+b+c)/3)
+arrayTest()
 ```
 
 ## Exercise 7
 
 ```python
-# YOUR SOLUTION HERE
+def arrayCountOnes1(arr):
+    num = 0
+    for i in range(len(arr)):
+        for j in range(len(arr[i])):
+            if arr[i][j] == 1:
+                num = num+1
+    return num
+print(arrayCountOnes1(b))
+def arrayCountOnes2(arr):
+    arr1 = np.where(arr == 1)
+    num = len(arr[arr1])
+    return num
+print(arrayCountOnes2(b))
 ```
 
 ## Excercises 8-???
@@ -96,28 +127,36 @@ While the Marsland book avoids using another popular package called Pandas, we w
 Repeat exercise A.1 from Marsland, but create a Pandas DataFrame instead of a NumPy array.
 
 ```python
-# YOUR SOLUTION HERE
+import pandas as pd
+df1 = pd.DataFrame(a, index = list(range(len(a))), columns = list(range(len(a[0]))))
+print(df1)
 ```
 
 ## Exercise 9
 Repeat exercise A.2 using a DataFrame instead.
 
 ```python
-# YOUR SOLUTION HERE
+df2 = pd.DataFrame(b, index = list(range(len(b))), columns = list(range(len(b[0]))))
+print(df2)
 ```
 
 ## Exercise 10
 Repeat exercise A.3 using DataFrames instead.
 
 ```python
-# YOUR SOLUTION HERE
+df3 = pd.DataFrame(c, index = list(range(len(c))), columns = list(range(len(c[0]))))
+print(df3)
 ```
 
 ## Exercise 11
 Repeat exercise A.7 using a dataframe.
 
 ```python
-# YOUR SOLUTION HERE
+def arrayCountOnesPanda(arr):
+    df4 = pd.DataFrame(arr, index = list(range(len(arr))), columns = list(range(len(arr[0]))))
+    df4 = df4[df4==1].count()
+    return np.sum(df4.to_numpy())
+print(arrayCountOnesPanda(b))
 ```
 
 ## Exercises 12-14
@@ -137,24 +176,25 @@ Notice how we have nice headers and mixed datatypes? That is one of the reasons 
 How do you select the ``name`` column without using .iloc?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df['name']
 ```
 
 ## Exercise 13
 After setting the index to ``sex``, how do you select all passengers that are ``female``? And how many female passengers are there?
 
 ```python
-## YOUR SOLUTION HERE
 titanic_df.set_index('sex',inplace=True)
+titanic_df.loc['female']
+len(titanic_df.loc['female'])
 ```
 
 ## Exercise 14
 How do you reset the index?
 
 ```python
-## YOUR SOLUTION HERE
+titanic_df.reset_index(inplace=True)
 ```
 
 ```python
-
+titanic_df
 ```
